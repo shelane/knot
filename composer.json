@@ -1,0 +1,123 @@
+{
+  "name": "shelane/knot",
+  "description": "Enables and uninstalls specified modules per defined environment.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Shelane French",
+      "role": "Maintainer"
+    }
+  ],
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*",
+    "composer/installers": "^2.1",
+    "fortawsome/fontawesome": "^6.4",
+    "illuminate/pagination": "^10.16",
+    "jquery/jquery": "^3.7",
+    "oomphinc/composer-installers-extender": "^2.0",
+    "symfony/mailer": "^6.3",
+    "twbs/bootstrap": "5.3.1"
+  },
+  "extra": {
+    "installer-types": [
+      "asset-library",
+      "bower-asset",
+      "npm-asset"
+    ],
+    "installer-paths": {
+      "starterkit/libraries/{$name}": [
+        "fortawsome/fontawesome",
+        "twbs/bootstrap",
+        "type:asset-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ]
+    }
+  },
+  "repositories": {
+    "fontawesome": {
+      "type": "package",
+      "package": {
+        "name": "fortawsome/fontawesome",
+        "version": "6.4.0",
+        "type": "asset-library",
+        "extra": {
+          "installer-name": "fontawesome"
+        },
+        "dist": {
+          "url": "https://github.com/FortAwesome/Font-Awesome/releases/download/6.4.0/fontawesome-free-6.4.0-web.zip",
+          "type": "zip"
+        },
+        "require": {
+          "composer/installers": "~2.0"
+        }
+      }
+    },
+    "bootstrap": {
+      "type": "package",
+      "package": {
+        "name": "twbs/bootstrap",
+        "version": "5.3.1",
+        "type": "asset-library",
+        "extra": {
+          "installer-name": "bootstrap"
+        },
+        "dist": {
+          "url": "https://github.com/twbs/bootstrap/archive/refs/tags/v5.3.1.zip",
+          "type": "zip"
+        },
+        "require": {
+          "composer/installers": "~2.0"
+        }
+      }
+    },
+    "jquery": {
+      "type": "package",
+      "package": {
+        "name": "jquery/jquery",
+        "version": "3.7.0",
+        "type": "asset-library",
+        "extra": {
+          "installer-name": "jquery"
+        },
+        "dist": {
+          "url": "https://github.com/jquery/jquery/archive/refs/tags/3.7.0.zip",
+          "type": "zip"
+        },
+        "require": {
+          "composer/installers": "~2.0"
+        }
+      }
+    },
+    "asset-packagist": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "_knot/App/"
+    }
+  },
+  "scripts": {
+  "post-install-cmd": [
+    "./post-install-update.sh"
+  ],
+  "post-update-cmd": [
+    "./post-install-update.sh"
+  ]
+},
+  "require-dev": {
+    "acquia/coding-standards": "^2.0",
+    "phpmd/phpmd": "^2.13"
+  }
+}

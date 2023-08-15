@@ -1,0 +1,57 @@
+<?php
+
+use App\Menu;
+
+$menu = [
+    [
+      'path' => 'home',
+      'label' => 'Home',
+      'title' => 'Home',
+      'menu' => true,
+     // 'icon' => 'fa fa-home nav-icon',
+     // 'style' => 'bg-primary',
+    ],
+    [
+      'path' => 'page2',
+      'label' => 'Page 2',
+      'title' => 'Page 2',
+      'menu' => true,
+    //  'icon' => 'far fa-file-alt nav-icon',
+    //  'style' => 'bg-tbr-blue',
+    ],
+    [
+      'path' => 'page3',
+      'label' => 'Page 3',
+      'title' => 'Page 3',
+      'menu' => true,
+     // 'icon' => 'far fa-solid fa-baseball nav-icon',
+     // 'style' => 'bg-primary',
+    ],
+  ];
+
+  $top_left = [
+    [
+      'path' => 'mailto:help@site.com',
+      'label' => 'help@site.com',
+      'menu' => true,
+      'icon' => 'fas fa-envelope',
+      'style' => 'bg-primary icon-header',
+    ],
+    [
+      'path' => 'tel:+15554221234',
+      'label' => 'Fields Hotline 555 422 1234',
+      'icon' => 'fas fa-solid fa-diamond',
+      'style' => 'bg-success icon-header',
+    ]
+  ];
+
+  $top_left = [
+    [
+      'path' => 'managers',
+      'label' => 'Login',
+      'icon' => 'fas fa-user-lock text-white',
+      'style' => 'bg-primary icon-header',
+    ]
+  ];
+
+Menu::$menu = $menu;

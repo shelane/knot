@@ -1,0 +1,163 @@
+:root {
+    --primary-color: #006dcc;
+    --primary-dark-color: #0044cc;
+    --secondary-color: #444;
+    --background-color: #f5f5f5;
+    --sidebar-bg-color: #333;
+    --text-color: #333;
+    --text-primary-color: #555;
+    --text-light-color: #777;
+    --text-dark-color: #000;
+    --link-color: #006dcc;
+    --link-hover-color: #0044cc;
+    --btn-bg-color: #fff;
+    --btn-bg-hover-color: #e6e6e6;
+    --btn-border-color: #ccc;
+    --btn-primary-bg-color: var(--primary-color);
+    --btn-primary-bg-hover-color: var(--primary-dark-color);
+    --btn-primary-text-color: #fff;
+    --active-background-color: #E5E5E5;
+    --body-font: Arial, sans-serif;
+    --bs-border-color: #AAA;
+}
+body {
+    background: #222;
+    background-image: url('img/black-linen.png');
+    background-position: initial;
+    background-repeat: initial;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.navbar {
+    padding: 0 1em;
+    border-bottom: 1px solid var(--text-dark-color);
+    box-shadow: 0 0 3px var(--text-dark-color);
+}
+
+@media (min-width: 768px) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+.navbar-expand-md .navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--btn-bg-color);
+}
+
+a.navbar-brand,
+a.navbar-brand:hover {
+    margin-left: 15px;
+    color: var(--text-light-color);
+}
+
+.navbar-nav > .nav-item > a.active,
+.navbar-nav > .nav-item > a.active:hover,
+.navbar-nav > .nav-item > a.active:focus {
+    background-color: var(--active-background-color);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
+    color: var(--text-primary-color);
+    text-decoration: none;
+    outline: none;
+}
+
+.navbar-nav > .nav-item > a:focus,
+.navbar-nav > .nav-item > a:hover {
+    background-color: rgba(0,0,0,0);
+}
+.navbar-nav > .nav-item > a:hover {
+    color: var(--btn-bg-color);
+}
+
+.navbar-nav > li:hover {
+    background-color: var(--secondary-color);
+}
+
+.navbar-nav > li > a {
+    color: var(--btn-primary-text-color);
+    text-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content {
+    background-color: var(--btn-primary-text-color);
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-image: none;
+    background-size: auto;
+    background-origin: padding-box;
+    background-clip: border-box;
+}
+@media (min-width: 768px) {
+    .content {
+        min-height: 750px;
+    }
+}
+.page-header {
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
+    border-bottom: 1px solid var(--btn-border-color);
+    border-top: 1px solid var(--btn-bg-color);
+    border-left: 1px solid var(--btn-bg-color);
+    padding: 0 1.25em;
+    margin-bottom: 1.25em;
+}
+
+.page-header .btn {
+    border-radius: 0;
+}
+
+.btn-text-dark .btn {
+    color: var(--sidebar-bg-color);
+}
+
+.page-header .btn-sm {
+    font-size: calc(var(--bs-btn-font-size) - 1px);
+}
+
+h1.page-title {
+    margin: 1em 0;
+    padding: 0;
+    line-height: 1em;
+    font-size: 1.5em;
+    color: var(--sidebar-bg-color);
+}
+
+/* Card Styles */
+.square-card {
+    border-radius: 0; /* Set border-radius to 0 for square corners */
+}
+
+.square-card .card-header {
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dddddd), color-stop(1, #fafafa));
+}
+
+.square-card .card-header a {
+    line-height: 3em;
+    color: var(--text-dark-color);
+    text-decoration: none;
+}
+
+.square-card .card-header > div {
+    padding-left: 1rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+}
+
+.square-card .card-header .end-button {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+/* Optional: Remove box-shadow if you don't want it */
+.square-card.card {
+    box-shadow: none;
+}
