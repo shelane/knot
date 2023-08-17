@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+## Run Code Sniffer or Mess Detector on all files
+##
+## Usage: fin code-sniff
+##
+## Applies automatic fixes to files using Acquia PHP standards.
+##
+## Includes extensions:	php, ssh, inc
+
+
+COMMAND="phpcs"
+MOD_PATH=${PROJECT_ROOT}
+STANDARDS="--standard=AcquiaPHP"
+EXTENSIONS="--extensions=php,inc,ssi,css,txt,md"
+while (( $# )); do
+    case "$1" in
+      --fix | -f)
+        COMMAND="phpcbf"
+        shift
+      ;;
+      --md | -m)
+        COMMAND="vendor/bin/phpmd"
+        STANDARDS="text phpmd"
+        EXTENSIONS="--suffixes php,inc,ssi"
+        shift
+      ;;
+      *)
+        MOD_PATH=$1
+        shift
+      ;;
+    esac
+done
+
+echo "running $COMMAND $MOD_PATH $STANDARDS $EXTENSIONS"
+
+fin run "$COMMAND $MOD_PATH $STANDARDS $EXTENSIONS"
