@@ -1,0 +1,46 @@
+{
+  "name": "shelane/knot",
+  "description": "The knot core framework and required packages.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Shelane French",
+      "role": "Maintainer"
+    }
+  ],
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*"
+  },
+  "repositories": {
+    "asset-packagist": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "_knot/App/"
+    }
+  },
+  "scripts": {
+  "post-install-cmd": [
+    "./sync-knot.sh"
+  ],
+  "post-update-cmd": [
+    "./sync-knot.sh"
+  ]
+},
+  "require-dev": {
+    "acquia/coding-standards": "^2.0",
+    "phpmd/phpmd": "^2.13"
+  }
+}
