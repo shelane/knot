@@ -181,3 +181,28 @@ function var_define($default = NULL, $override = NULL, array $validate = [], $fo
     return '';
   }
 }
+
+/**
+ * Returns parameter value or array of values.
+ *
+ * @param string $name
+ *   The name of the parameter to retrieve.
+ * @param bool $all
+ *   The setting to retrieve all values submitted (true) or the first (false).
+ *
+ * @return array|string|bool
+ *   The value of the parameter.
+ */
+function web_param(string $name, bool $all = false): mixed {
+  $webParams = $_REQUEST;
+
+  if (!array_key_exists($name, $webParams)) {
+    return '';
+  }
+
+  if ($all) {
+    return is_array($webParams[$name]) ? $webParams[$name] : [$webParams[$name]];
+  }
+
+  return is_array($webParams[$name]) ? $webParams[$name][0] : ($webParams[$name] !== '' ? $webParams[$name] : true);
+}
