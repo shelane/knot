@@ -82,6 +82,23 @@ function get_path($query_path, $content_path): false|string {
 }
 
 /**
+ * Gets the rendered content of the encapsulated content.
+ *
+ * @param $callback
+ *   A callback function for wrapping around content to save.
+ *
+ * @return false|string
+ *   The rendered content of the page.
+ */
+function capture_content($callback): false|string {
+  ob_start();
+  $callback();
+  $content = ob_get_contents();
+  ob_end_clean();
+  return $content;
+}
+
+/**
  * Gets the rendered content of the requested page.
  *
  * @param $file
