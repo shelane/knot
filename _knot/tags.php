@@ -196,7 +196,7 @@ function var_define($default = NULL, $override = NULL, array $validate = [], $fo
 function web_param(string $name, bool $all = false): mixed {
   $webParams = $_REQUEST;
 
-  if (!array_key_exists($name, $webParams)) {
+  if (!array_key_exists($name, $webParams) || $webParams[$name] === '' || $webParams[$name] === null) {
     return '';
   }
 
@@ -204,5 +204,5 @@ function web_param(string $name, bool $all = false): mixed {
     return is_array($webParams[$name]) ? $webParams[$name] : [$webParams[$name]];
   }
 
-  return is_array($webParams[$name]) ? $webParams[$name][0] : ($webParams[$name] !== '' ? $webParams[$name] : true);
+  return is_array($webParams[$name]) ? $webParams[$name][0] : $webParams[$name];
 }
