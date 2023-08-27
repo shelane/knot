@@ -24,6 +24,7 @@ require Knot::get('root_path') . '/_config/menu.ssi';
 
 // What path is called from the user request or URI.
 $q = rtrim(($_REQUEST['q'] ?? ''), '/');
+Knot::set('response_path', $q);
 $__query_path = var_define(Knot::get('default_page'), $q);
 // The path to the page content file or FALSE if not found where expected.
 $__file_path = get_path($__query_path, Knot::get('content_path'));
