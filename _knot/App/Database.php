@@ -67,8 +67,11 @@ class Database {
    *
    * @throws \Exception
    */
-  public static function getConnection(): Database {
-    return new self(Knot::get('dbconfig'));
+  public static function getConnection($config = []): Database {
+    if (empty($config)) {
+      $config = Knot::get('dbconfig');
+    }
+    return new self($config);
   }
 
   /**
