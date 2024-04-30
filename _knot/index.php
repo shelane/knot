@@ -16,6 +16,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../_knot/knot.php';
 // symlink index file is called from (an /admin path can have a completely
 // separate site application).
 Knot::set('root_path', dirname($_SERVER['SCRIPT_FILENAME']));
+Knot::set('web_path', dirname($_SERVER['SCRIPT_NAME']));
 
 // Required config and menu files from the site.
 //todo, register items to Knot?
