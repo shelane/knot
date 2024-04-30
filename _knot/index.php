@@ -34,8 +34,10 @@ Menu::$path = $__query_path;
 // Set Page to be called by the template files.
 Page::$menu = Menu::renderMenu();
 
-Page::$title = Menu::$title;
-if (Menu::$template) {
+if (isset(Menu::$title)) {
+  Page::$title = Menu::$title;
+}
+if (!isset(Page::$template) && isset(Menu::$template)) {
   Page::$template = Menu::$template;
 }
 

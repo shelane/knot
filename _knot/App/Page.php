@@ -10,7 +10,7 @@ class Page {
    * The page title.
    *
    */
-  public static string $title;
+  public static string $title = '';
 
   /**
    * The template file name.
