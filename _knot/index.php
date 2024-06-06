@@ -9,6 +9,7 @@
 use App\Knot;
 use App\Menu;
 use App\Page;
+use App\Session;
 
 require $_SERVER['DOCUMENT_ROOT'] . '/../_knot/knot.php';
 
@@ -18,6 +19,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../_knot/knot.php';
 Knot::set('root_path', dirname($_SERVER['SCRIPT_FILENAME']));
 Knot::set('web_path', dirname($_SERVER['SCRIPT_NAME']));
 
+$session = new Session();
+Knot::set('session', $session);
+
 // Required config and menu files from the site.
 //todo, register items to Knot?
 require Knot::get('root_path') . '/_config/config.ssi';
@@ -25,6 +29,10 @@ if (file_exists(Knot::get('root_path') . '/_config/config-local.ssi')) {
   require Knot::get('root_path') . '/_config/config-local.ssi';
 }
 require Knot::get('root_path') . '/_config/menu.ssi';
+
+if ($session->has('username')) {
+  Knot::set('_username', $session->get('username'));
+}
 
 // What path is called from the user request or URI.
 $q = rtrim(($_REQUEST['q'] ?? ''), '/');
@@ -45,8 +53,24 @@ if (!isset(Page::$template) && isset(Menu::$template)) {
   Page::$template = Menu::$template;
 }
 
+if (web_param('logout') == 'true') {
+  $session->destroy();
+  Knot::set('_username', '');
+  echo 'Logged Out';
+}
+
+if (Knot::get('restricted') && Menu::$restricted !== FALSE && !Knot::get('_username')) {
+  if (web_param('task')) {
+    $page = Knot::get('content_path') . '_process/login.ssi';
+    Page::$content = page_content($page);
+  }
+  else {
+    Page::$title = 'Log In';
+    Page::$content = page_content(get_path('login', Knot::get('content_path')));
+  }
+}
 // If there is something to be processed, do that here.
-if (isset($route) && $route) {
+elseif (isset($route) && $route) {
   $page = Knot::get('content_path') . '_process/' . strtolower($route) . '.ssi';
   Page::$content = page_content($page);
 }
