@@ -36,6 +36,13 @@ class Menu {
   public static string $path = '';
 
   /**
+   * The current path.
+   *
+   * @var bool
+   */
+  public static bool $restricted = FALSE;
+
+  /**
    * Builds standard menu.
    *
    * @param string $path
@@ -57,6 +64,7 @@ class Menu {
       if (isset($item['path']) && $item['path'] == self::$path) {
         self::$title = $item['title'] ?? 'Untitled';
         self::$template = $item['template'] ?? '';
+        self::$restricted = $item['restricted'] ?? FALSE;
         $item['astyle'] = ' active';
       }
       if (isset($item['children'])) {
