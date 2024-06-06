@@ -153,6 +153,7 @@ function obfuscate($input): string {
  *   An optional validation array of values to check from request parameter.
  * @param $force
  *   An optional overload value.
+ *
  * @return mixed|string
  *   The value of the variable based on the cascading rules check.
  */
@@ -193,10 +194,10 @@ function var_define($default = NULL, $override = NULL, array $validate = [], $fo
  * @return array|string|bool
  *   The value of the parameter.
  */
-function web_param(string $name, bool $all = false): mixed {
+function web_param(string $name, bool $all = FALSE): mixed {
   $webParams = $_REQUEST;
 
-  if (!array_key_exists($name, $webParams) || $webParams[$name] === '' || $webParams[$name] === null) {
+  if (!array_key_exists($name, $webParams) || $webParams[$name] === '' || $webParams[$name] === NULL) {
     return '';
   }
 
@@ -205,4 +206,47 @@ function web_param(string $name, bool $all = false): mixed {
   }
 
   return is_array($webParams[$name]) ? $webParams[$name][0] : $webParams[$name];
+}
+
+/**
+ * Returns if request is AJAX.
+ *
+ */
+function isRequestAjax(): bool {
+  return strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest';
+}
+
+/**
+ * Provides a formatted date with checks for type.
+ *
+ * @param string $date
+ *   The date value.
+ * @param string $format
+ *   The date format.
+ * @param string|NULL $offset
+ *   The offset for epoch dates.
+ *
+ * @return int|string
+ *   The formatted date.
+ * @throws Exception
+ */
+function safe_date(string $date, string $format = 'n/j/Y', string $offset = NULL): int|string {
+  if (!empty($date) && $date != '0000-00-00' && strtotime($date)) {
+    if ($format == 'epoch') {
+      $epoch = strtotime('1970-01-01 00:00:00 GMT') - strtotime($date);
+      if ($offset) {
+        $epoch += date_offset_get(new DateTime($date));
+      }
+      return $epoch;
+    }
+    else {
+      return date_format(date_create($date), $format);
+    }
+  }
+  elseif ($format == 'Y-m-d') {
+    return '0000-00-00';
+  }
+  else {
+    return '';
+  }
 }
