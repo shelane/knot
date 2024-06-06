@@ -12,28 +12,28 @@ class Menu {
    *
    * @var array
    */
-  public static array $menu;
+  public static array $menu = [];
 
   /**
    * The current page title.
    *
    * @var string
    */
-  public static string $title;
+  public static string $title = '';
 
   /**
    * The current page template.
    *
    * @var string
    */
-  public static string $template;
+  public static string $template = '';
 
   /**
    * The current path.
    *
    * @var string
    */
-  public static string $path;
+  public static string $path = '';
 
   /**
    * Builds standard menu.
