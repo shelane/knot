@@ -21,6 +21,9 @@ Knot::set('web_path', dirname($_SERVER['SCRIPT_NAME']));
 // Required config and menu files from the site.
 //todo, register items to Knot?
 require Knot::get('root_path') . '/_config/config.ssi';
+if (file_exists(Knot::get('root_path') . '/_config/config-local.ssi')) {
+  require Knot::get('root_path') . '/_config/config-local.ssi';
+}
 require Knot::get('root_path') . '/_config/menu.ssi';
 
 // What path is called from the user request or URI.
