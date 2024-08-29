@@ -101,9 +101,16 @@ class QueryString {
 
       // Encode key-value pairs and add them to the encoded array
       foreach ($params as $param) {
-        list($key, $value) = explode('=', $param, 2);
+        // Split the parameter into key and value
+        $parts = explode('=', $param, 2);
+        $key = $parts[0] ?? ''; // Default to empty string if not set
+        $value = $parts[1] ?? ''; // Default to empty string if not set
+
+        // Encode key and value
         $encodedKey = urlencode($key);
         $encodedValue = urlencode($value);
+
+        // Add the encoded pair to the array
         $encoded[] = "{$encodedKey}={$encodedValue}";
       }
 
