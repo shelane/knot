@@ -197,15 +197,29 @@ function var_define($default = NULL, $override = NULL, array $validate = [], $fo
 function web_param(string $name, bool $all = FALSE): mixed {
   $webParams = $_REQUEST;
 
+  // Check if the parameter exists and is not empty
   if (!array_key_exists($name, $webParams) || $webParams[$name] === '' || $webParams[$name] === NULL) {
-    return '';
+    return ''; // Return empty string if not set
   }
 
   if ($all) {
-    return is_array($webParams[$name]) ? $webParams[$name] : [$webParams[$name]];
+    // Sanitize each parameter if it's an array
+    if (is_array($webParams[$name])) {
+      return array_map('htmlspecialchars', $webParams[$name]);
+    }
+    else {
+      return [htmlspecialchars($webParams[$name])];
+    }
   }
 
-  return is_array($webParams[$name]) ? $webParams[$name][0] : $webParams[$name];
+  // Handle single parameter safely
+  if (is_array($webParams[$name])) {
+    // Check if the first element exists
+    return isset($webParams[$name][0]) ? htmlspecialchars($webParams[$name][0]) : '';
+  }
+
+  // Ensure we return an empty string if the value is null
+  return htmlspecialchars($webParams[$name]) ?: ''; // Use the ternary operator
 }
 
 /**
