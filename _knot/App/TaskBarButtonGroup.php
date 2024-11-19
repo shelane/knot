@@ -25,9 +25,20 @@ class TaskBarButtonGroup extends TaskBar {
         $output .= '<ul class="dropdown-menu btn-sm">';
 
         foreach ($item as $subTitle => $subLink) {
-          $icon = parent::$icons[$subTitle] ?? '';
-          $icon = $icon ? "<i class=\"{$icon}\"></i> " : '';
-          $output .= "<li><a class=\"dropdown-item\" href=\"{$subLink}\">{$icon}{$subTitle}</a></li>";
+          if ($subLink === 'divider') {
+            // Render a divider
+            $output .= '<li><hr class="dropdown-divider"></li>';
+          }
+          // If $item is a string, render a regular item
+          elseif ($subLink === '') {
+            // Render non-clickable item
+            $output .= '<span class="dropdown-item-text">' . $subTitle . '</span>';
+          }
+          else {
+            $icon = parent::$icons[$subTitle] ?? '';
+            $icon = $icon ? "<i class=\"{$icon}\"></i> " : '';
+            $output .= "<li><a class=\"dropdown-item\" href=\"{$subLink}\">{$icon}{$subTitle}</a></li>";
+          }
         }
 
         $output .= '</ul></div>';
