@@ -240,12 +240,12 @@ function isRequestAjax(): bool {
  * @param string|NULL $offset
  *   The offset for epoch dates.
  *
- * @return int|string
+ * @return int|string|null
  *   The formatted date.
  * @throws Exception
  */
-function safe_date(string $date, string $format = 'n/j/Y', string $offset = NULL): int|string {
-  if (!empty($date) && $date != '0000-00-00' && strtotime($date)) {
+function safe_date(string $date, string $format = 'n/j/Y', string $offset = NULL): string|null {
+  if (!empty($date) && $date != NULL && strtotime($date)) {
     if ($format == 'epoch') {
       $epoch = strtotime('1970-01-01 00:00:00 GMT') - strtotime($date);
       if ($offset) {
@@ -258,7 +258,7 @@ function safe_date(string $date, string $format = 'n/j/Y', string $offset = NULL
     }
   }
   elseif ($format == 'Y-m-d') {
-    return '0000-00-00';
+    return NULL;
   }
   else {
     return '';
