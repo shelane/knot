@@ -244,7 +244,7 @@ function isRequestAjax(): bool {
  *   The formatted date.
  * @throws Exception
  */
-function safe_date(string $date, string $format = 'n/j/Y', string $offset = NULL): string|null {
+function safe_date(?string $date, string $format = 'n/j/Y', string $offset = NULL): string|null {
   if (!empty($date) && $date != NULL && strtotime($date)) {
     if ($format == 'epoch') {
       $epoch = strtotime('1970-01-01 00:00:00 GMT') - strtotime($date);
