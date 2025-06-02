@@ -15,10 +15,11 @@ class TaskBarButtonGroup extends TaskBar {
     $output = '<div class="btn-group btn-group-sm btn-text-dark">';
 
     foreach ($this->items as $title => $item) {
+      $iconId = 'icon-' . preg_replace('/[^a-zA-Z0-9_\-]/', '-', $title);
       if (is_array($item)) {
         // If $item is an array, render a dropdown menu
         $output .= '<div class="btn-group" role="group">';
-        $output .= '<button type="button" class="btn btn-light btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
+        $output .= '<button type="button" id="' . $iconId . '" class="btn btn-light btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
         $output .= '<i class="' . parent::$icons[$title] . ' ' . $this->iconSize . '"></i>&nbsp;';
         $output .= $title;
         $output .= '</button>';
@@ -45,7 +46,7 @@ class TaskBarButtonGroup extends TaskBar {
       }
       else {
         // If $item is a string, render a regular item
-        $output .= '<a class="btn btn-light btn-sm btn-outline-secondary" href="' . $item . '">';
+        $output .= '<a id="' . $iconId . '" class="btn btn-light btn-sm btn-outline-secondary" href="' . $item . '">';
         $output .= '<i class="' . parent::$icons[$title] . ' ' . $this->iconSize . '"></i>&nbsp;';
         $output .= $title;
         $output .= '</a>';
